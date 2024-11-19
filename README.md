@@ -15,7 +15,7 @@ a web application where you can monitor the progress of different development pr
 
 ## Run Locally
 
-Node version 18 or higher is required
+Node version 18 or higher is required and PostgreSQL is required installed
 
 Clone the project
 
