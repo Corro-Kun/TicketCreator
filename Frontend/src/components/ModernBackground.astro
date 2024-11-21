@@ -1,0 +1,29 @@
+<div class="container" >
+  <div class="inner-element" >
+  </div>
+</div>
+
+<style>
+  .container {
+    position: absolute;
+    top: 0;
+    z-index: -10;
+    height: 100%;
+    width: 100%;
+    background-color: var(--Color_Background);
+  }
+  .inner-element {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: auto;
+    left: auto;
+    height: 500px;
+    width: 500px;
+    transform: translate(-30%, 20%); 
+    border-radius: 50%; 
+    background-color: rgb(114, 191, 120, 0.5); 
+    opacity: 0.5; 
+    filter: blur(80px); 
+  }
+</style>

@@ -1,0 +1,78 @@
+---
+import Project from '@/components/icon/Project.svelte';
+import Story from '@/components/icon/Story.svelte';
+import Ticket from '@/components/icon/Ticket.svelte';
+import Logout from '@/components/icon/Logout.svelte';
+
+const { project=false, story=false, ticket=false } = Astro.props
+---
+
+<div class="main" >
+    <a 
+    href="/home/projects" 
+    class={project? "active": ""} 
+    title="lista de proyectos"  >
+        <Project />
+        {project && <div class="check" />}
+    </a>
+    <a 
+    href="/home/stories" 
+    class={story? "active": ""} 
+    title="historias de usuario" >
+        <Story />
+        {story && <div class="check" />}
+    </a>
+    <a 
+    href="/home/tickets" 
+    class={ticket? "active": ""}
+    title="tablero de tickets" >
+        <Ticket />
+        {ticket && <div class="check" />}
+    </a>
+    <a 
+    href="" 
+    title="cerrar sesión"
+    >
+        <Logout />
+    </a>
+</div>
+
+<style>
+    .main{
+        display: flex;
+        padding: 5px;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        backdrop-filter: blur(10px);
+        border: 2px solid var(--Color_Border);
+        border-radius: 8px;
+        overflow: hidden;
+        gap: 10px;
+    }
+    a{
+        position: relative;
+        display: flex;
+        height: 35px;
+        width: 35px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        color: var(--Color_Text);
+        transition: .3s;
+    }
+    a:hover{
+        color: var(--Color_Background_Second);
+    }
+    .active{
+        color: var(--Color_Background_Second);
+    }
+    .check{
+        bottom: 0;
+        height: 1px;
+        width: 1px;
+        position: absolute;
+        border: 2px solid var(--Color_Background_Second);
+        border-radius: 50%;
+    }
+</style>

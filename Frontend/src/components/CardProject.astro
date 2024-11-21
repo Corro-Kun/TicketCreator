@@ -1,0 +1,58 @@
+---
+import ButtonSelect from '@/components/ButtonSelect.svelte';
+const {id, title, description} = Astro.props;
+---
+
+<div class="card" transition:name=`project-card-${id}` >
+    <div class="tag" >
+        <p>Proyecto</p>
+    </div>
+    <h3 transition:name=`project-title-${id}` >
+        {title}
+    </h3>
+    <p transition:name=`project-description-${id}` >
+        {description.length > 88? `${description.slice(0, 88)}...` : description}
+    </p>
+    <div class="action" >
+        <a  
+        href=`/home/project/${id}`
+        >mostrar mas</a>
+        <ButtonSelect client:load {id} />
+    </div>
+</div>
+
+<style>
+    .card{
+        display: flex;
+        padding: 10px;
+        width: 300px;
+        flex-direction: column;
+        gap: 10px;
+        border: 1px solid var(--Color_Border);
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .card h3{
+        color: var(--Color_Text);
+        text-align: center;
+    }
+    .card p{
+        color: var(--Color_Text);
+    }
+    .tag{
+        padding: 2px 5px;
+        width: max-content;
+        background-color: var(--Color_Background_Second);
+        color: var(--Color_Text_Second);
+        border-radius: 4px;
+    }
+    .action{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .action a{
+        text-decoration: none;
+        color: var(--Color_Background_Second);
+    }
+</style>

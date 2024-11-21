@@ -13,7 +13,7 @@ export const getProjects = async (req, res) => {
 export const getProject = async (req, res) => {
     try {
         const id = req.params.id;
-        const {rows, rowCount} = await pg.query('SELECT * FROM project WHERE id = $1;', [id]);
+        const {rows, rowCount} = await pg.query('SELECT p.id ,p.name, p.description, c.name as company FROM project p JOIN company c ON c.id = p.company_id WHERE p.id = $1;', [id]);
         if (rowCount === 0) {
             return res.status(404).json({message: 'project not found'});
         }

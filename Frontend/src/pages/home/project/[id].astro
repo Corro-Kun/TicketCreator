@@ -1,0 +1,142 @@
+---
+import LayoutHome from "@/layouts/LayoutHome.astro";
+import { UrlApi } from "@/const";
+
+const { id } = Astro.params;
+
+let project = {
+  id: id,
+  name: "",
+  description: "",
+  company: "",
+};
+
+let stories = [];
+
+const response = await fetch(`${UrlApi}/project/${id}`, {
+  headers: {
+    token: Astro.cookies.get("token")?.value || "",
+  },
+});
+
+if (!response.ok) {
+    Astro.redirect("/home/projects");
+}
+project = await response.json();
+
+const response2 = await fetch(`${UrlApi}/user_stories/${id}`, {
+  headers: {
+    token: Astro.cookies.get("token")?.value || "",
+  },
+});
+
+if (response2.ok) {
+  stories = await response2.json();
+}
+---
+
+<LayoutHome title="proyecto">
+  <div class="center">
+    <div class="card" transition:name=`project-card-${id}`>
+      <div class="actions">
+        <a href="/home/projects">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-square-rounded-x"
+            ><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path
+              d="M10 10l4 4m0 -4l-4 4"></path><path
+              d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z"
+            ></path></svg
+          >
+        </a>
+        {
+          /* 
+                <a href="">
+                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-pencil"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" /><path d="M13.5 6.5l4 4" /></svg>
+                </a>
+                */
+        }
+      </div>
+      <div class="titles">
+        <h3 transition:name=`project-title-${id}`>{project.name}</h3>
+        <p transition:name=`project-description-${id}`>{project.description}</p>
+      </div>
+      <div class="story">
+        <h3>Historia de Usuarios</h3>
+        {
+          stories.length === 0 ? (
+            <p style="text-align: center;" >No hay historias de usuario</p>
+          ) :  
+          stories.map((story) => (
+            <p>- {story.name}</p>
+          ))
+        }
+      </div>
+      <div class="end">
+        <p>Compañía: {project.company}</p>
+      </div>
+    </div>
+  </div>
+</LayoutHome>
+
+<style>
+  .center {
+    display: flex;
+    padding: 20px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+  .card {
+    padding: 20px;
+    width: 600px;
+    border: 1px solid var(--Color_Border);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .actions {
+    display: flex;
+    justify-content: space-between;
+  }
+  .actions a {
+    text-decoration: none;
+    color: var(--Color_Text);
+    transition: 0.3s all;
+  }
+  .actions a:hover {
+    color: var(--Color_Background_Second);
+  }
+  .titles {
+    gap: 10px;
+  }
+  .titles h3 {
+    color: var(--Color_Text);
+    /*transform: scale(1.5);*/
+    text-align: center;
+    margin: 5px;
+  }
+  .titles p {
+    color: var(--Color_Text);
+  }
+  .story {
+    padding: 0 20px;
+  }
+  .story h3 {
+    margin: 20px;
+    color: var(--Color_Text);
+    text-align: center;
+  }
+  .end {
+    margin-top: 20px;
+  }
+</style>

@@ -1,0 +1,1 @@
+export const UrlApi = 'http://192.168.20.24:3000/api';

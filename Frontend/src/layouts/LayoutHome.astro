@@ -1,0 +1,55 @@
+---
+import Layout from "./Layout.astro";
+import Menu from "@/components/Menu.astro";
+import Login from "@/security/Login.svelte";
+
+if (Astro.cookies.get("token")?.value === undefined) {
+    Astro.redirect("/login");
+}
+
+const { title, description,enable,project=false, story=false, ticket=false } = Astro.props;
+---
+
+<Layout title={title}>
+    <Login client:load />
+    <main>
+        {enable ?
+        <div class="titles" >
+            <h1>{title}</h1>
+            <p>{description}</p>
+        </div>
+        : null}
+        <slot />
+        <div class="menu" >
+            <Menu {project} {story} {ticket} />
+        </div>
+    </main>
+</Layout>
+
+<style>
+    main{
+        position: relative;
+        padding: 10px;
+        height: 100%;
+        width: 100%;
+        overflow: auto;
+    }
+    .menu{
+        position: fixed;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        bottom: 20px;
+        z-index: 100;
+    }
+    .titles{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 20px;
+        color: var(--Text_Color);
+        text-align: center;
+    }
+</style>

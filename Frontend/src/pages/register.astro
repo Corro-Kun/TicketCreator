@@ -1,0 +1,19 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import RegisterComponent from "@/components/Register.svelte";
+---
+
+<Layout title="Crear una cuenta" >
+    <div class="main" >
+        <RegisterComponent client:load />
+    </div>
+</Layout>
+
+<style>
+    .main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+</style>

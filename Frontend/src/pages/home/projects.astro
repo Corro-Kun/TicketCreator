@@ -1,0 +1,44 @@
+---
+import LayoutHome from "@/layouts/LayoutHome.astro";
+import CardProject from "@/components/CardProject.astro";
+import { UrlApi } from "@/const";
+
+let projects = [];
+
+const response = await fetch(UrlApi + "/projects",{
+    headers: {
+      token: Astro.cookies.get("token")?.value || "",
+    },
+});
+
+if (response.ok){
+    projects = await response.json();
+}
+---
+
+<LayoutHome 
+title="Lista de proyectos" 
+description="Aquí encontrarás todos los proyectos que se han creado en la compañía"
+project 
+enable>
+    <div>
+        {projects.map((project) => (
+            <CardProject 
+                key={project.id} 
+                id={project.id} 
+                title={project.name} 
+                description={project.description} 
+            />
+        ))}
+    </div>
+</LayoutHome>
+
+<style>
+    div{
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+</style>
