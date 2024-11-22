@@ -40,6 +40,24 @@ Install dependencies
   .\server.ps1 i all
 ```
 
+Create a .env file in the backend folder with the following content
+
+```env
+  PORT=3000
+  HOST_DB = "localhost"
+  PORT_DB = 5432
+  USER_DB = "postgres"
+  PASSWORD_DB = ""
+  DATABASE_DB = "ticketcreator"
+  TOKEN_PASSWORD = "1234"
+```
+
+and in the frontend folder with the following content
+
+```env
+  PUBLIC_API=http://localhost:3000/api
+```
+
 Start the app
 
 ```bash

@@ -27,6 +27,11 @@
   async function handleSubmit(e) {
     e.preventDefault();
     loading = 1;
+    if(data.company_id === ""){
+      alert("Debes seleccionar una compañía");
+      loading = 0;
+      return;
+    }
     const response = await fetch(`${UrlApi}/register`, {
       method: "POST",
       headers: {

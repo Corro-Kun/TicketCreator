@@ -12,6 +12,6 @@ export const PASSWORD_DB = process.env.PASSWORD_DB;
 
 export const DATABASE_DB = process.env.DATABASE_DB;
 
-export const PORT = process.env.PORT;
+export const PORT = process.env.PORT || 3000;
 
 export const TOKEN = process.env.TOKEN_PASSWORD;
