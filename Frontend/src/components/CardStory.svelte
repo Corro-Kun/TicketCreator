@@ -1,13 +1,17 @@
+<script>
+  let {id, name, description, priority_id} = $props();
+</script>
+
 <div class="ag-courses_item">
-  <a href="#" class="ag-courses-item_link">
+  <a href="" class="ag-courses-item_link">
     <div class="ag-courses-item_bg"></div>
     <div class="ag-courses-item_title">
-      UX/UI Web-Design&#160;+ Mobile Design
+      {name}
     </div>
     <div class="ag-courses-item_date-box">
       Prioridad:
       <span class="ag-courses-item_date">
-        Alta
+        {priority_id === 1 ? 'Baja' : priority_id === 2 ? 'Media' : 'Alta'}
       </span>
     </div>
   </a>
@@ -15,8 +19,6 @@
 
 <style>
 .ag-courses_item {
-  -ms-flex-preferred-size: calc(33.33333% - 30px);
-  flex-basis: calc(33.33333% - 30px);
   margin: 0 15px 30px;
   width: 300px;
   overflow: hidden;
@@ -28,7 +30,6 @@
   padding: 30px 20px;
   color: var(--Text_Color);
   overflow: hidden;
-
   position: relative;
   text-decoration: none;
 }

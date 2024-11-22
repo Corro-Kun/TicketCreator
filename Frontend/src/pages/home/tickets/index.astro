@@ -1,0 +1,47 @@
+---
+import LayoutHome from "@/layouts/LayoutHome.astro";
+import Board from "@/components/Board.svelte";
+---
+
+<LayoutHome title="Tablero de Tickets" description="Gestiona los tickets" ticket enable>
+    <div class="new" >
+        <a class="add" href="/home/tickets/new">Añadir</a>
+        <a class="c" href="">Cancelados</a>
+    </div>
+    <div class="main" >
+        <Board client:load />
+    </div>
+</LayoutHome>
+
+<style>
+    .main{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80%;
+    }
+    .add{
+        padding: 5px 8px;
+        text-decoration: none;
+        color: var(--Color_Text_Second);
+        background-color: var(--Color_Background_Second);
+        border-radius: 5px;
+    }
+    .c{
+        text-decoration: none;
+        color: var(--Color_Text);
+    }
+    .new{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        padding: 10px;
+    }
+
+    @media screen and (max-width: 1300px) {
+        .main{
+            display: block;
+        }
+    }
+</style>

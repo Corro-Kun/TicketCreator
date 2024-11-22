@@ -1,0 +1,19 @@
+---
+import LayoutHome from "@/layouts/LayoutHome.astro";
+import NewUserStory from "@/components/NewUserStory.svelte";
+---
+
+<LayoutHome title="Crear una nueva historia de usuario" >
+    <div>
+        <NewUserStory client:load />
+    </div>
+</LayoutHome>
+
+<style>
+    div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+</style>

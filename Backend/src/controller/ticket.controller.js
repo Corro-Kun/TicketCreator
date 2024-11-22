@@ -3,12 +3,22 @@ import pg from '../db/pg.js';
 export const getTickets = async (req, res) => {
     try {
         const id = req.params.id;
-        const response = await pg.query('SELECT * FROM ticket WHERE user_story_id = $1', [id]);
+        const response = await pg.query('SELECT t.id, t.name, t.description, t.state_id, t.user_story_id FROM ticket t JOIN user_story u ON u.id = t.user_story_id WHERE u.project_id = $1', [id]);
         res.status(200).json(response.rows);
     } catch (error) {
         res.status(500).json({message: 'Internal server error'});
     }
 }
+
+export const getTicket = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const response = await pg.query('select t.id, t.name, t.description, t.state_id, t.user_story_id, u.name as story from ticket t join user_story u on u.id = t.user_story_id where t.id = $1', [id]);
+        res.status(200).json(response.rows[0]);
+    } catch (error) {
+        res.status(500).json({message: 'Internal server error'});    
+    }
+};
 
 export const createTicket = async (req, res) => {
     try {
@@ -36,7 +46,7 @@ export const createComment = async (req, res) => {
 export const getComments = async (req, res) => {
     try {
         const id = req.params.id;
-        const response = await pg.query('SELECT * FROM comment WHERE ticket_id = $1', [id]);
+        const response = await pg.query('SELECT c.description, u.name FROM comment c JOIN user_company u ON c.user_id = u.id WHERE c.ticket_id = $1 ORDER BY c ASC', [id]);
         res.status(200).json(response.rows);
     } catch (error) {
         res.status(500).json({message: 'Internal server error'});

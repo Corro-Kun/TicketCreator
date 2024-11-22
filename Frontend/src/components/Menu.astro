@@ -30,12 +30,23 @@ const { project=false, story=false, ticket=false } = Astro.props
         {ticket && <div class="check" />}
     </a>
     <a 
+    id="logout"
     href="" 
     title="cerrar sesión"
     >
         <Logout />
     </a>
 </div>
+
+<script>
+    import {navigate} from 'astro:transitions/client';
+    document.getElementById("logout").addEventListener("click", (e) => {
+        e.preventDefault();
+        localStorage.removeItem("token");
+        localStorage.removeItem("project");
+        navigate("/login");
+    });
+</script>
 
 <style>
     .main{

@@ -4,6 +4,7 @@
   import {navigate} from 'astro:transitions/client';
   import Loader from '@/components/icon/Loader.svelte';
   import { setCookie } from "@/lib/Cookies.js";
+  import Input from './Input.svelte';
 
   let company = $state([]);
 
@@ -48,22 +49,18 @@
 
 </script>
 
-<form class="register" on:submit={handleSubmit} >
+<form class="register" onsubmit={handleSubmit} >
     <div class="top" >
         <div class="form" >
             <h2>Crear Cuenta</h2>
-            <div class="input">
-                <input id="name" type="text" required bind:value={data.name} />
-              <label for="name">Nombre de usuario</label>
+            <Input id="name" type="text" required bind:value={data.name} label="Nombre de usuario" >
               <svg  xmlns="http://www.w3.org/2000/svg"  width="22"  height="22"  viewBox="0 0 24 24"  fill="currentColor"  class="icon icon-tabler icons-tabler-filled icon-tabler-user">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                 <path d="M12 2a5 5 0 1 1 -5 5l.005 -.217a5 5 0 0 1 4.995 -4.783z" />
                 <path d="M14 14a5 5 0 0 1 5 5v1a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-1a5 5 0 0 1 5 -5h4z" />
               </svg>
-            </div>
-            <div class="input">
-                <input id="email" type="text" required bind:value={data.email} />
-              <label for="email">Correo</label>
+            </Input>
+            <Input id="email" type="text" required bind:value={data.email} label="Correo" >
               <svg
                 version="1.0"
                 xmlns="http://www.w3.org/2000/svg"
@@ -87,11 +84,9 @@
                   />
                 </g>
               </svg>
-            </div>
-            <div class="input">
-                <input id="password" type="password" required bind:value={data.password} />
-              <label for="password">Contraseña</label>
-              <svg
+            </Input>
+            <Input id="passowrd" type="password" required bind:value={data.password} label="Contraseña">
+             <svg
                 version="1.0"
                 xmlns="http://www.w3.org/2000/svg"
                 width="16.000000pt"
@@ -118,13 +113,13 @@
                   />
                 </g>
               </svg>
-            </div>
+            </Input>
         </div>
         <div class="object" ></div>
         <div class="list" >
           <h2>Compañías</h2>
           {#each company as item}
-            <div on:click={()=> data.company_id = item.id} class={data.company_id === item.id? 'active': ''} >
+            <div onclick={()=> data.company_id = item.id} class={data.company_id === item.id? 'active': ''} >
               <h3>{item.name}</h3>
               <p>{item.nit}</p>
               <p>{item.address}</p>
@@ -251,41 +246,6 @@
   }
   button:hover {
     filter: contrast(120%);
-  }
-  .input {
-    position: relative;
-    width: 100%;
-    height: 50px;
-    border-bottom: 2px solid var(--Color_Border);
-    margin: 30px 0;
-  }
-  .input label {
-    position: absolute;
-    top: 50%;
-    left: 5px;
-    transform: translateY(-50%);
-    font-size: 1em;
-    color: var(--Color_Text);
-    font-weight: 500;
-    pointer-events: none;
-    transition: 0.5s;
-  }
-  .input input {
-    width: 100%;
-    height: 100%;
-    background: transparent;
-    border: none;
-    outline: none;
-    font-size: 1em;
-    color: var(--Color_Text);
-    font-weight: 600;
-    padding: 0 35px 0 5px;
-    transition: 0.3s;
-  }
-  .input input:focus ~ label,
-  .input input:valid ~ label {
-    top: -5px;
-    font-size: 0.8em;
   }
   svg {
     position: absolute;

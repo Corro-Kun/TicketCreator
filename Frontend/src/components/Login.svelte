@@ -4,6 +4,7 @@
   import {navigate} from 'astro:transitions/client';
   import Loader from '@/components/icon/Loader.svelte';
   import { setCookie } from "@/lib/Cookies.js";
+  import Input from './Input.svelte';
 
 
   let data = $state({
@@ -44,38 +45,16 @@
 <div class="login">
   <div class="main">
     <h2>Iniciar sesión</h2>
-    <form on:submit={login} >
-      <div class="input">
-        <input id="email" type="text" required bind:value={data.email} />
-        <label for="email">Correo</label>
-        <svg
-          version="1.0"
-          xmlns="http://www.w3.org/2000/svg"
-          width="15.000000pt"
-          height="15.000000pt"
-          viewBox="0 0 64.000000 64.000000"
-          preserveAspectRatio="xMidYMid meet"
-        >
-          <g
-            transform="translate(0.000000,64.000000) scale(0.100000,-0.100000)"
-            stroke="none"
-          >
-            <path
-              d="M43 550 c-38 -16 -43 -41 -43 -233 0 -167 2 -187 19 -208 l19 -24
-                    282 0 282 0 19 24 c17 21 19 41 19 211 0 170 -2 190 -19 211 l-19 24 -269 2
-                    c-147 1 -278 -2 -290 -7z m407 -155 c-63 -63 -122 -115 -130 -115 -8 0 -67 52
-                    -130 115 l-115 115 245 0 245 0 -115 -115z m-130 -158 c27 0 50 18 156 124
-                    l124 124 0 -165 0 -164 -63 62 c-59 58 -97 78 -97 50 0 -7 28 -41 62 -75 l62
-                    -63 -244 0 -245 0 58 51 c32 29 57 59 57 70 0 27 -22 24 -51 -7 -13 -14 -41
-                    -39 -62 -56 l-37 -30 0 164 0 163 124 -124 c106 -106 129 -124 156 -124z"
-            />
-          </g>
+    <form onsubmit={login} >
+      <Input id="email" type="text" required bind:value={data.email} label="Correo">
+        <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="15.000000pt" height="15.000000pt" viewBox="0 0 64.000000 64.000000" preserveAspectRatio="xMidYMid meet" >
+          <g transform="translate(0.000000,64.000000) scale(0.100000,-0.100000)" stroke="none" >
+            <path d="M43 550 c-38 -16 -43 -41 -43 -233 0 -167 2 -187 19 -208 l19 -24 282 0 282 0 19 24 c17 21 19 41 19 211 0 170 -2 190 -19 211 l-19 24 -269 2 c-147 1 -278 -2 -290 -7z m407 -155 c-63 -63 -122 -115 -130 -115 -8 0 -67 52 -130 115 l-115 115 245 0 245 0 -115 -115z m-130 -158 c27 0 50 18 156 124 l124 124 0 -165 0 -164 -63 62 c-59 58 -97 78 -97 50 0 -7 28 -41 62 -75 l62 -63 -244 0 -245 0 58 51 c32 29 57 59 57 70 0 27 -22 24 -51 -7 -13 -14 -41 -39 -62 -56 l-37 -30 0 164 0 163 124 -124 c106 -106 129 -124 156 -124z" /> 
+          </g> 
         </svg>
-      </div>
-      <div class="input">
-        <input id="password" type="password" required bind:value={data.password} />
-        <label for="password">Contraseña</label>
-        <svg
+      </Input>
+      <Input id="password" type="password" required bind:value={data.password} label="Contraseña" >
+      <svg
           version="1.0"
           xmlns="http://www.w3.org/2000/svg"
           width="16.000000pt"
@@ -101,9 +80,9 @@
                     70 -10 0 -21 -7 -24 -16z"
             />
           </g>
-        </svg>
-      </div>
-      {#if loading}
+        </svg> 
+      </Input>
+     {#if loading}
       <div class="loader" >
         <Loader />
       </div>
@@ -151,41 +130,6 @@
     font-size: 2.2em;
     transition: 0.3s;
   }
-  .input {
-    position: relative;
-    width: 100%;
-    height: 50px;
-    border-bottom: 2px solid var(--Color_Border);
-    margin: 30px 0;
-  }
-  .input label {
-    position: absolute;
-    top: 50%;
-    left: 5px;
-    transform: translateY(-50%);
-    font-size: 1em;
-    color: var(--Color_Text);
-    font-weight: 500;
-    pointer-events: none;
-    transition: 0.5s;
-  }
-  .input input {
-    width: 100%;
-    height: 100%;
-    background: transparent;
-    border: none;
-    outline: none;
-    font-size: 1em;
-    color: var(--Color_Text);
-    font-weight: 600;
-    padding: 0 35px 0 5px;
-    transition: 0.3s;
-  }
-  .input input:focus ~ label,
-  .input input:valid ~ label {
-    top: -5px;
-    font-size: 0.8em;
-  }
   svg {
     position: absolute;
     top: 50%;
@@ -194,7 +138,6 @@
     fill: var(--Color_Text);
     transition: 0.3s;
   }
-
   button {
     width: 100%;
     height: 45px;

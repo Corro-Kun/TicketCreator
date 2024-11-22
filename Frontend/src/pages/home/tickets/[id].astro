@@ -1,0 +1,126 @@
+---
+import LayoutHome from "@/layouts/LayoutHome.astro";
+import Comment from "@/components/Comment.svelte";
+
+import { UrlApi } from "@/const";
+
+const { id } = Astro.params;
+
+let data = {
+    id: id,
+    name: "",
+    description: "",
+    state_id: 0,
+    story: "",
+};
+
+const response = await fetch(`${UrlApi}/ticket/${id}`, {
+  headers: {
+    token: Astro.cookies.get("token")?.value || "",
+  },
+});
+
+if (!response.ok) {
+    Astro.redirect("/home/tickets");
+}
+
+data = await response.json();
+---
+
+<LayoutHome title="Ticket">
+  <div class="center">
+    <div class="card">
+      <div class="actions">
+        <a href="/home/tickets">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-square-rounded-x"
+            ><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path
+              d="M10 10l4 4m0 -4l-4 4"></path><path
+              d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z"
+            ></path></svg
+          >
+        </a>
+        <p style={
+            data.state_id === 1 ? "color: #069af0" :
+            data.state_id === 2 ? "color: #6c8a00" :
+            data.state_id === 3 ? "color: green":
+            "color: red"
+        } >
+            {data.state_id === 1 ? "Activo" :
+            data.state_id === 2 ? "En Proceso" :
+            data.state_id === 3 ? "Finalizado" :
+            "Cancelado"}
+        </p>
+        <a href=`/home/tickets/edit/${id}`>
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-pencil"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" /><path d="M13.5 6.5l4 4" /></svg>
+        </a>
+      </div>
+      <div class="titles">
+        <h3 >{data.name}</h3>
+        <p >{data.description}</p>
+      </div>
+      <div class="end">
+        <p>Historia de usuario: {data.story}</p>
+      </div>
+      <div class="end">
+        <h3>Comentarios</h3>
+      </div>
+      <Comment id={id} client:load />
+    </div>
+  </div>
+</LayoutHome>
+
+<style>
+  .center {
+    display: flex;
+    padding: 20px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+  .card {
+    padding: 20px;
+    width: 600px;
+    border: 1px solid var(--Color_Border);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .actions {
+    display: flex;
+    justify-content: space-between;
+  }
+  .actions a {
+    text-decoration: none;
+    color: var(--Color_Text);
+    transition: 0.3s all;
+  }
+  .actions a:hover {
+    color: var(--Color_Background_Second);
+  }
+  .titles {
+    gap: 10px;
+  }
+  .titles h3 {
+    color: var(--Color_Text);
+    /*transform: scale(1.5);*/
+    text-align: center;
+    margin: 5px;
+  }
+  .titles p {
+    color: var(--Color_Text);
+  }
+  .end {
+    margin-block: 20px;
+  }
+</style>

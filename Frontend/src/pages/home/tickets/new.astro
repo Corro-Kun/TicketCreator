@@ -1,0 +1,19 @@
+---
+import LayoutHome from "@/layouts/LayoutHome.astro";
+import NewTicket from "@/components/NewTicket.svelte";
+---
+
+<LayoutHome title="Crear un nuevo Ticket">
+    <div>
+        <NewTicket client:load />
+    </div>
+</LayoutHome>
+
+<style>
+    div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80%;
+    }
+</style>

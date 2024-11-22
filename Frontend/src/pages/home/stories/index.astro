@@ -1,6 +1,6 @@
 ---
 import LayoutHome from "@/layouts/LayoutHome.astro";
-import CardStory from "@/components/CardStory.svelte";
+import UserListStory from "@/components/UserListStory.svelte";
 ---
 
 <LayoutHome 
@@ -8,5 +8,5 @@ title="Historias de usuario"
 description="Aquí encontrarás todas las historias de usuario que se han creado en el proyecto"  
 story
 enable>
-    <CardStory />
+   <UserListStory client:load />
 </LayoutHome>
