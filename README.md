@@ -71,13 +71,13 @@ Start the app
 
 ## Screenshots
 
-<img src="https://via.placeholder.com/468x300?text=App+Screenshot+Here" alt="App Screenshot">
+<img src="https://res.cloudinary.com/daqrkk4sr/image/upload/f_auto,q_auto/zkipbfm4asusoec1ffsy" alt="App Screenshot">
 <br>
 <br>
-<img src="https://via.placeholder.com/468x300?text=App+Screenshot+Here" alt="App Screenshot">
+<img src="https://res.cloudinary.com/daqrkk4sr/image/upload/f_auto,q_auto/niegcowhhsramppjymup" alt="App Screenshot">
 <br>
 <br>
-<img src="https://via.placeholder.com/468x300?text=App+Screenshot+Here" alt="App Screenshot">
+<img src="https://res.cloudinary.com/daqrkk4sr/image/upload/f_auto,q_auto/imafj11e7rkug3zcssq4" alt="App Screenshot">
 
 ## Color Reference
 
