@@ -1,0 +1,19 @@
+---
+import LayoutHome from "@/layouts/LayoutHome.astro";
+import CanceledTickets from "@/components/CanceledTickets.svelte";
+---
+
+<LayoutHome title="Tickets Cancelados" description="Aquí están todos los tickets cancelados" enable>
+    <div>
+        <CanceledTickets client:load />
+    </div>
+</LayoutHome>
+
+<style>
+    div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+</style>
